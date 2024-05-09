@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/form";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 // LoginForm component definition.
 export const LoginForm = () => {
@@ -85,6 +87,8 @@ export const LoginForm = () => {
               )}
             />
           </div>
+          <FormError message="" /> {/* Invalid credentials ! */}
+          <FormSuccess message="" /> {/* Login successful! */}
           <Button type="submit" size="lg" className="w-full">
             Login
           </Button>
