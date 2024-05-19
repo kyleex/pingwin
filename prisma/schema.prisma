@@ -32,7 +32,6 @@ model Session {
   sessionToken String   @unique
   userId       String
   expires      DateTime
-  password     String?
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
  
@@ -42,6 +41,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  password      String?
   accounts      Account[]
   sessions      Session[]
 }
