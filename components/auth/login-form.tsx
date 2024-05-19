@@ -5,7 +5,9 @@
 
 "use client"; // Directive indicating that the following code is client-side.
 
-import z from "zod"; // Importing zod library for schema validation.
+import z, { set } from "zod"; // Importing zod library for schema validation.
+
+import { useState, useTransition } from "react"; // Importing useTransition from react for transitions.
 import { useForm } from "react-hook-form"; // Importing useForm from react-hook-form for form handling.
 import { zodResolver } from "@hookform/resolvers/zod"; // Importing zodResolver from @hookform/resolvers/zod to integrate zod with react-hook-form.
 import { loginSchema } from "@/schemas"; // Importing loginSchema which is a zod schema defining the structure of login data.
@@ -24,9 +26,14 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { login } from "@/actions/login";
+import { start } from "repl";
 
 // LoginForm component definition.
 export const LoginForm = () => {
+  const [error, setError] = useState<string | undefined>(""); // Initializing an error state.
+  const [success, setSuccess] = useState<string | undefined>(""); // Initializing an error state.
+  const [isPending, startTransition] = useTransition(); // Initializing a transition.
   // Using useForm hook to create a form object that handles the form state.
   // z.infer<typeof loginSchema> is used to infer the type of form data from loginSchema.
   // resolver: zodResolver(loginSchema) is used to validate form data using loginSchema.
@@ -39,7 +46,16 @@ export const LoginForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof loginSchema>) => {
-    console.log(values);
+    setError(""); // Resetting the error state.
+    setSuccess(""); // Resetting the success state.
+
+    startTransition(() => {
+      login(values) // Calling the login action with the form data.
+        .then((data) => {
+          setError(data.error);
+          setSuccess(data.success);
+        });
+    });
   };
   // Rendering the form inside a CardWrapper.
   return (
@@ -65,6 +81,7 @@ export const LoginForm = () => {
                   <FormControl>
                     <Input
                       {...field}
+                      disabled={isPending}
                       placeholder="john.doe@example.com"
                       type="email"
                     />
@@ -80,16 +97,26 @@ export const LoginForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="*********" type="password" />
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      placeholder="*********"
+                      type="password"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <FormError message="" /> {/* Invalid credentials ! */}
-          <FormSuccess message="" /> {/* Login successful! */}
-          <Button type="submit" size="lg" className="w-full">
+          <FormError message={error} /> {/* Invalid credentials ! */}
+          <FormSuccess message={success} /> {/* Login successful! */}
+          <Button
+            disabled={isPending}
+            type="submit"
+            size="lg"
+            className="w-full"
+          >
             Login
           </Button>
         </form>
