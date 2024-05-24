@@ -51,9 +51,9 @@ export const LoginForm = () => {
 
     startTransition(() => {
       login(values) // Calling the login action with the form data.
-        .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
+        .then((data?) => {
+          setError(data?.error);
+          setSuccess(data?.success);
         });
     });
   };
