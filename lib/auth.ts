@@ -22,12 +22,11 @@ export const {
      * @param {Object} options.user - The user object containing the user's ID.
      * @returns {Promise<boolean>} A promise that resolves to `true` if the user exists and their email is verified, otherwise `false`.
      */
-    async signIn({ user }) {
-      const existingUser = await getUserById(user.id);
+    async signIn({ user, account }) {
+      // allow Oauth without email verification
+      const existingUser = await getUserById(user?.id ?? "");
 
-      if (!existingUser || !existingUser.emailVerified) {
-        return false;
-      }
+      // TODO: Add 2FA check here
 
       return true;
     },
