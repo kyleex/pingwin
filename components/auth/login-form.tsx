@@ -28,6 +28,7 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
 import { start } from "repl";
+import Link from "next/link";
 
 // LoginForm component definition.
 export const LoginForm = () => {
@@ -104,6 +105,14 @@ export const LoginForm = () => {
                       type="password"
                     />
                   </FormControl>
+                  <Button
+                    size="sm"
+                    variant="link"
+                    asChild
+                    className="px-0 font normal"
+                  >
+                    <Link href="/reset-password">Forgot password?</Link>
+                  </Button>
                   <FormMessage />
                 </FormItem>
               )}
