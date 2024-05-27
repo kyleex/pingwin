@@ -78,7 +78,7 @@ export const LoginForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="text-secondary">Email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -96,7 +96,7 @@ export const LoginForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="text-secondary">Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -109,7 +109,7 @@ export const LoginForm = () => {
                     size="sm"
                     variant="link"
                     asChild
-                    className="px-0 font normal"
+                    className="px-0 font normal text-muted-foreground"
                   >
                     <Link href="/reset-password">Forgot password?</Link>
                   </Button>
@@ -124,7 +124,8 @@ export const LoginForm = () => {
             disabled={isPending}
             type="submit"
             size="lg"
-            className="w-full"
+            className="w-full text-seccondary text-transform: uppercase "
+            variant="default"
           >
             Login
           </Button>
