@@ -1,7 +1,3 @@
-Pour ajouter les coordonnées Twitter au fichier README, vous pourriez structurer la section "Support" comme suit, en incluant à la fois l'adresse e-mail et le lien Twitter :
-
----
-
 # Application de Suivi de Tennis de Table
 
 ## Vue d'Ensemble
@@ -37,7 +33,3 @@ Si vous avez besoin d'aide ou avez des questions sur l'utilisation de l'app, veu
 
 - **Email :** antwill34@icloud.com
 - **Twitter :** [@kyleex_pkg](https://twitter.com/kyleex_pkg)
-
----
-
-Cette mise à jour permet aux utilisateurs de choisir leur méthode de communication préférée pour contacter le support.
