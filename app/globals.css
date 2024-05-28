@@ -61,5 +61,6 @@ body,
   }
   body {
     @apply bg-background text-foreground;
+    width: fit-content;
   }
 }

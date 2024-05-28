@@ -1,22 +1,26 @@
 import { auth } from "@/lib/auth";
 import { LogoutButton } from "@/components/auth/logout-button";
 import { Button } from "@/components/ui/button";
+import { Header } from "@/components/elements/header/header";
 
 const SettingsPage = async () => {
   const session = await auth();
 
   return (
-    <div>
-      <h1>Settings</h1>
+    <>
+      <Header></Header>
       <div>
-        {JSON.stringify(session)}
-        <LogoutButton>
-          <Button variant="secondary" size="lg">
-            Sign out
-          </Button>
-        </LogoutButton>
+        <h1>Settings</h1>
+        <div>
+          {JSON.stringify(session)}
+          <LogoutButton>
+            <Button variant="secondary" size="lg">
+              Sign out
+            </Button>
+          </LogoutButton>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
