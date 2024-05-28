@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Pour ajouter les coordonnées Twitter au fichier README, vous pourriez structurer la section "Support" comme suit, en incluant à la fois l'adresse e-mail et le lien Twitter :
 
-## Getting Started
+---
 
-First, run the development server:
+# Application de Suivi de Tennis de Table
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Vue d'Ensemble
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+L'Application de Suivi de Tennis de Table est une application web communautaire conçue pour soutenir les passionnés de tennis de table. Cette application sert d'alternative indépendante à fftt, offrant aux joueurs une plateforme pour enregistrer leurs matchs et suivre leur progression.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Fonctionnalités
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Création de Compte :** Inscrivez-vous pour gérer votre profil personnel et suivre vos statistiques de jeu.
+- **Enregistrement des Parties :** Consignez les détails de chaque match, y compris le score, les sets et les points globaux.
+- **Historique des Parties :** Consultez vos jeux passés et surveillez votre amélioration au fil du temps.
+- **Calcul Automatique des Scores :** L'application calcule automatiquement les points gagnés ou perdus pendant les matchs, ce qui aide à votre développement en tant que joueur.
 
-## Learn More
+## Fonctionnalités Prévues
 
-To learn more about Next.js, take a look at the following resources:
+- **Enregistrement des Matchs en Double :** Nous prévoyons d'introduire la capacité d'enregistrer et de suivre les matchs en double.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pour Commencer
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Pour commencer à utiliser l'Application de Suivi de Tennis de Table, suivez ces étapes :
 
-## Deploy on Vercel
+1. Accédez à l'application via un navigateur web.
+2. Créez votre compte avec un nom d'utilisateur et un mot de passe uniques.
+3. Commencez à enregistrer vos matchs et à suivre vos progrès!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contribution
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+En tant que projet communautaire, nous accueillons les contributions de développeurs, de designers et d'enthousiastes du tennis de table. Si vous êtes intéressé à contribuer, veuillez nous contacter ou visiter notre page de directives de contribution.
+
+## Support
+
+Si vous avez besoin d'aide ou avez des questions sur l'utilisation de l'app, veuillez contacter notre équipe de support à l'adresse suivante :
+
+- **Email :** antwill34@icloud.com
+- **Twitter :** [@kyleex_pkg](https://twitter.com/kyleex_pkg)
+
+---
+
+Cette mise à jour permet aux utilisateurs de choisir leur méthode de communication préférée pour contacter le support.
