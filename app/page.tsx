@@ -11,7 +11,7 @@ export default async function Home() {
         <p className="text-white text-lg">A simple authentification service</p>
         <div>
           <LoginButton>
-            <Button variant="secondary" size="lg">
+            <Button variant="outline" size="lg">
               Sign in
             </Button>
           </LoginButton>
