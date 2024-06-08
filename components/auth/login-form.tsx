@@ -27,7 +27,6 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
-import { start } from "repl";
 import Link from "next/link";
 
 // LoginForm component definition.
@@ -60,11 +59,13 @@ export const LoginForm = () => {
   };
   // Rendering the form inside a CardWrapper.
   return (
+
     <CardWrapper
       headerLabel="Welcome Back"
       backButtonLabel="Don't have an account"
       backButtonHref="/register"
       showSocial
+      className="bg-white h-fit p-8 rounded-lg shadow-md w-full max-w-sm md:max-w-md lg:max-w-md xl:max-w-md"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">

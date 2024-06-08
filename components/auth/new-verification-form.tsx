@@ -44,6 +44,7 @@ export const NewVerificationForm = () => {
       headerLabel="Confirming your verification"
       backButtonLabel="Back to login"
       backButtonHref="/login"
+      className="bg-white h-fit p-8 rounded-lg shadow-md w-full max-w-sm md:max-w-md lg:max-w-md xl:max-w-md"
     >
       <div className="flex items-center w-full justify-center">
         {!success && !error && <BeatLoader />}

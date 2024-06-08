@@ -65,10 +65,11 @@ export const RegisterForm = () => {
       backButtonLabel="Already have an account? Login here"
       backButtonHref="/login"
       showSocial
+      className="bg-white h-fit p-8 rounded-lg shadow-md w-full max-w-sm md:max-w-md lg:max-w-md xl:max-w-md"
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-4">
+          <div className="space-y-4 w-full">
             {/* FormField component for rendering the email field. */}
             {/* // control={form.control} is used to connect the field to the form object. */}
             {/* // name="email" sets the name of the field. */}

@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto} width: fit-content`}>{children}</body>
+      <body className={`${roboto} w-screen`}>{children}</body>
     </html>
   );
 }
