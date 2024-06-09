@@ -50,6 +50,7 @@ model User {
   role          UserRole @default(USER)
   accounts      Account[]
   sessions      Session[]
+  matches       Match[]
 }
  
 model VerificationToken {
@@ -69,3 +70,15 @@ model ResetPasswordToken {
 
   @@unique([email, token])
 }
+
+model Match {
+  id         Int      @id @default(autoincrement())
+  player1    String
+  player2    String
+  score      String
+  winner     String
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+}
+
