@@ -11,7 +11,7 @@ export default async function protectedLayout ({
 
     return (
         <SessionProvider session={session}>
-            <div>
+            <div className="flex justify-center">
                 {" "}
                 {children}{" "}
             </div>

@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto} font-sans w-screen mx-10`}>{children}</body>
+      <body className={`${roboto} font-sans mx-10`}>{children}</body>
     </html>
   );
 }
