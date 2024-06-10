@@ -37,6 +37,9 @@ export const {
 
       session.user.customField = "Anything you want";
 
+      session.user.token = token
+
+
       if (token.role && session.user) {
         session.user.role = token.role as UserRole;
       }
