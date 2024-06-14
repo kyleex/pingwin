@@ -2,12 +2,42 @@
 
 import { useState, useTransition, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import { addMatch } from "@/actions/add-match";
 import { useSession } from "next-auth/react";
+import { addMatch } from "@/actions/add-match";
+
+
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
+
+
 
 const AppPage = () => {
   const router = useRouter();
   const session = useSession();
+  
+
+  const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
+ 
+  type SheetSide = (typeof SHEET_SIDES)[2]
 
   const [matches, setMatches] = useState([]);
 
@@ -60,57 +90,96 @@ const AppPage = () => {
 
   return (
     <>
-      <main className="p-4">
-        <section className="mb-4">
-          <h2 className="text-lg font-bold">Ajouter une nouvelle partie</h2>
-          <div className="bg-gray-100 p-4 rounded shadow">
-            <p>Analysez votre partie avec des statistiques !</p>
-            <div className="flex space-x-2 mt-2">
-              <input
-                type="number"
-                value={playerSets}
-                onChange={(e) => setplayerSets(e.target.value)}
-                placeholder="Score Joueur A"
-                className="p-2 border rounded"
+      <main className="flex flex-col gap-y-5 w-fit">
+        <h2 className="text-lg font-bold my-3">Historique des parties jouées</h2>
+        <section>
+          <Card>
+            <CardContent className="flex flex-row gap-x-3 pt-6 w-fit">
+              <img
+                src="/versus.svg"
+                alt="versus-icon"
+                className="w-7 h-7 shrink-0"
               />
-              <input
-                type="number"
-                value={opponentSets}
-                onChange={(e) => setopponentSets(e.target.value)}
-                placeholder="Score Joueur B"
-                className="p-2 border rounded"
-              />
-              <input
-                type="text"
-                value={opponentPlayerName}
-                onChange={(e) => setopponentPlayerName(e.target.value)}
-                placeholder="Adversaire"
-                className="p-2 border rounded"
-              />
-              <button
-                className="px-4 py-2 bg-yellow-500 text-white rounded"
-                onClick={handleAddMatch}
-              >
-                Ajouter une partie
-              </button>
-            </div>
-          </div>
+              <span className="flex flex-col w-fit">
+                <span>
+                  <p className="font-bold text-lg leaning-6 w-fit">Ajouter une nouvelle partie</p>
+                  <p className="font-medium text-sm mt-1">Analysez votre partie avec des statistiques !</p>
+                </span>
+                <span className="grid grid-cols-2 gap-2 mt-3.5">
+                  <Sheet key="top">
+                    <SheetTrigger asChild>
+                      <Button variant="default" className="leaning-5 font-medium w-fit">Ajouter une partie</Button>
+                    </SheetTrigger>
+                    <SheetContent side="top" className="absolute">
+                      <SheetHeader>
+                        <SheetTitle>Ajouter une partie</SheetTitle>
+                        {/* <SheetDescription>
+                          Make changes to your profile here. Click save when you're done.
+                        </SheetDescription> */}
+                      </SheetHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right">
+                            Adversaire
+                          </Label>
+                          <Input type="text" value={opponentPlayerName} onChange={(e) => setopponentPlayerName(e.target.value)} className="col-span-3" placeholder="Prénom NOM" />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Ton nombre de set gagné ou perdu
+                          </Label>
+                          <Input type="number" value={playerSets} onChange={(e) => setplayerSets(e.target.value)} placeholder="0" className="col-span-3"/>
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right">
+                            Set Adversaire
+                          </Label>
+                          <Input type="number" value={opponentSets} onChange={(e) => setopponentSets(e.target.value)} placeholder="0" className="col-span-3"/>
+                        </div>
+                      </div>
+                      <SheetFooter>
+                        <SheetClose asChild>
+                          <Button type="submit" onClick={handleAddMatch}>Envoyer</Button>
+                        </SheetClose>
+                      </SheetFooter>
+                    </SheetContent>
+                  </Sheet>
+                </span>
+              </span>
+            </CardContent>
+          </Card>
         </section>
 
         <section className="mb-4">
-          <h2 className="text-lg font-bold">Matchs récents</h2>
-
           {matches.length > 0 && (
-            <div className="flex space-x-2">
-              {matches.map((match, index) => (
-                <span
-                  key={index}
-                  className={`px-2 py-1 rounded text-white ${match.winner == session.data?.user.name  ? 'bg-green-500' : 'bg-red-500'}`}
-                >
-                  {match.winner == session.data?.user.name ? 'V' : 'D'} 
-                </span>
+            <div>
+              {matches.filter(match => match.userId === session.data?.user.id).map((match, index) => (
+                <div>
+                  <Link href={`/matches/${match.id}`}>
+                    {/* <p>22/03/2024  •  Amical</p> */}
+                    {/* <Separator></Separator> */}
+                    <Card className="flex items-center my-2 cursor-pointer">
+                        <CardContent className="p-4 flex flex-row items-center w-full">
+                          <span key={index} className={`flex justify-center items-center size-10 rounded text-white grow-0 ${match.winner == session.data?.user.name  ? 'bg-dark-sea-green' : 'bg-fire-opal'} text-2xl font-bold mr-5`}>{match.winner == session.data?.user.name ? 'V' : 'D'}</span>
+                          <div className="flex flex-col grow">
+                            <span className="flex flex-row gap-x-4 items-center">
+                              <p className="font-bold text-base">{match.player2}</p>
+                              <p className="flex justify-center items-center h-fit px-2 py-0.5 rounded-full text-black bg-primary font-bold text-xs">900</p>
+                            </span>
+                            <p className=" font-thin text-s text-gray-400">{match.score}</p>
+                          </div>
+                          <span className={`
+                            flex justify-center items-center h-fit px-4 py-0.5 rounded-full
+                            text-white font-bold text-s ${match.winner == session.data?.user.name  ? 'bg-dark-sea-green' : 'bg-fire-opal'}`}
+                          >
+                            {match.winner == session.data?.user.name  ? '+' : '-'}
+                            0
+                          </span>
+                        </CardContent>
+                    </Card>
+                  </Link>
+                </div>
               ))}
-              <button className="px-2 py-1 bg-yellow-500 text-white rounded">+</button>
             </div>
           )}
         </section>

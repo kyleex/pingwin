@@ -2,12 +2,41 @@
 
 import { useState, useTransition, useEffect } from "react";
 import { useRouter } from 'next/navigation';
-import { addMatch } from "@/actions/add-match";
 import { useSession } from "next-auth/react";
+import { addMatch } from "@/actions/add-match";
+
+
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
+import { Input } from "@/components/ui/input"
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import Link from "next/link";
+
+
 
 const AppPage = () => {
   const router = useRouter();
   const session = useSession();
+  
+
+  const SHEET_SIDES = ["top", "right", "bottom", "left"] as const
+ 
+  type SheetSide = (typeof SHEET_SIDES)[2]
 
   const [matches, setMatches] = useState([]);
 
@@ -60,41 +89,63 @@ const AppPage = () => {
 
   return (
     <>
-      <main className="p-4">
-        <section className="mb-4">
-          <h2 className="text-lg font-bold">Ajouter une nouvelle partie</h2>
-          <div className="bg-gray-100 p-4 rounded shadow">
-            <p>Analysez votre partie avec des statistiques !</p>
-            <form className="flex space-x-2 mt-2">
-              <input
-                type="number"
-                value={playerSets}
-                onChange={(e) => setplayerSets(e.target.value)}
-                placeholder="Score Joueur A"
-                className="p-2 border rounded"
+      <main className="">
+        <section className="w-full max-w-sm md:max-w-md lg:max-w-md xl:max-w-md">
+          <Card>
+            <CardContent className="flex flex-row gap-x-3 pt-6">
+              <img
+                src="/versus.svg"
+                alt="Pingwins logo"
+                className="w-7 h-7 shrink-0"
               />
-              <input
-                type="number"
-                value={opponentSets}
-                onChange={(e) => setopponentSets(e.target.value)}
-                placeholder="Score Joueur B"
-                className="p-2 border rounded"
-              />
-              <input
-                type="text"
-                value={opponentPlayerName}
-                onChange={(e) => setopponentPlayerName(e.target.value)}
-                placeholder="Adversaire"
-                className="p-2 border rounded"
-              />
-              <button
-                className="px-4 py-2 bg-yellow-500 text-white rounded"
-                onClick={handleAddMatch}
-              >
-                Ajouter une partie
-              </button>
-            </form>
-          </div>
+              <span className="flex flex-col">
+                <span>
+                  <p className="font-bold text-lg leaning-6 w-fit">Ajouter une nouvelle partie</p>
+                  <p className="font-medium text-sm mt-1">Analysez votre partie avec des statistiques !</p>
+                </span>
+                <span className="grid grid-cols-2 gap-2 mt-3.5">
+                  <Sheet key="top">
+                    <SheetTrigger asChild>
+                      <Button variant="default" className="leaning-5 font-medium shrink-0">Ajouter une partie</Button>
+                    </SheetTrigger>
+                    <SheetContent side="top" className="fixed">
+                      <SheetHeader>
+                        <SheetTitle>Ajouter une partie</SheetTitle>
+                        {/* <SheetDescription>
+                          Make changes to your profile here. Click save when you're done.
+                        </SheetDescription> */}
+                      </SheetHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right">
+                            Adversaire
+                          </Label>
+                          <Input type="text" value={opponentPlayerName} onChange={(e) => setopponentPlayerName(e.target.value)} className="col-span-3" placeholder="Prénom NOM" />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Ton nombre de set gagné ou perdu
+                          </Label>
+                          <Input type="number" value={playerSets} onChange={(e) => setplayerSets(e.target.value)} placeholder="0" className="col-span-3"/>
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label className="text-right">
+                            Set Adversaire
+                          </Label>
+                          <Input type="number" value={opponentSets} onChange={(e) => setopponentSets(e.target.value)} placeholder="0" className="col-span-3"/>
+                        </div>
+                      </div>
+                      <SheetFooter>
+                        <SheetClose asChild>
+                          <Button type="submit" onClick={handleAddMatch}>Envoyer</Button>
+                        </SheetClose>
+                      </SheetFooter>
+                    </SheetContent>
+                  </Sheet>
+                </span>
+              </span>
+            </CardContent>
+          </Card>
         </section>
 
         <section className="mb-4">
@@ -105,7 +156,7 @@ const AppPage = () => {
               {matches.map((match, index) => (
                 <span
                   key={index}
-                  className={`px-2 py-1 rounded text-white ${match.winner == session.data?.user.name  ? 'bg-green-500' : 'bg-red-500'}`}
+                  className={`px-2 py-1 rounded text-white ${match.winner == session.data?.user.name  ? 'bg-dark-sea-green' : 'bg-fire-opal'}`}
                 >
                   {match.winner == session.data?.user.name ? 'V' : 'D'} 
                 </span>
@@ -130,33 +181,7 @@ const AppPage = () => {
             </div>
           </div>
         </section>
-
-        <section className="mb-4">
-          <h2 className="text-lg font-bold">Classements des joueurs</h2>
-    <div>
-            <div className="flex justify-between items-center py-2">
-              <span className="font-semibold">Top</span>
-              <span>John</span>
-              <span>1850 pts</span>
-            </div>
-            <div className="flex justify-between items-center py-2">
-              <span className="font-semibold">Alice</span>
-              <span>Markus</span>
-              <span>1720 pts</span>
-            </div>
-            <div className="flex justify-between items-center py-2">
-              <span className="font-semibold">Sophi</span>
-              <span>Oliver</span>
-              <span>1560 pts</span>
-            </div>
-            <div className="flex justify-between items-center py-2">
-              <span className="font-semibold">Vous</span>
-              <span>Vos parties</span>
-              <span>420 pts</span>
-            </div>
-            <button className="px-4 py-2 bg-gray-800 text-white rounded">Détails</button>
-    </div>
-        </section>
+        
       </main>
     </>
   );
