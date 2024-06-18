@@ -182,7 +182,7 @@ const MatchesPage = () => {
               {matches.map((match) => (
                 <div key={match.id}>
                   <Link href={`/matches/${match.id}`}>
-                    <li key={match.id}>
+                    <li key={match.id} className="list-none my-4">
                       <Card className="flex items-center my-2 cursor-pointer">
                         <CardContent className="p-4 flex flex-row items-center w-full">
                           <span
