@@ -14,10 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="size-full flex justify-center">
-      <body
-        className={`${roboto} font-sans w-full h-full max-w-sm md:max-w-md lg:max-w-md xl:max-w-md flex justify-center flex-row`}
-      >
+    <html
+      lang="fr"
+      className={`size-full flex justify-center font-sans ${roboto}`}
+    >
+      <body className="w-full h-full sm:max-w-sm md:max-w-md lg:max-w-md xl:max-w-md flex flex-col">
         {children}
       </body>
     </html>

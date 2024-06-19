@@ -1,21 +1,17 @@
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/lib/auth";
 import React from "react";
-  
-export default async function protectedLayout ({
-    children,
-}: { 
-    children: React.ReactNode
-}) {
-    const session = await auth();
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/ui/icon";
+import Link from "next/link";
+import footerNavigation from "@/components/navigation/footer-nav";
 
-    return (
-        <SessionProvider session={session}>
-            <div className="flex justify-center">
-                {" "}
-                {children}{" "}
-            </div>
-        </SessionProvider>
-      );
+export default async function protectedLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await auth();
+
+  return <SessionProvider session={session}>{children}</SessionProvider>;
 }
-  
