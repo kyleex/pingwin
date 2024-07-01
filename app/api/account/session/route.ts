@@ -1,15 +1,15 @@
 // pages/api/account/session.ts
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextRequest, NextResponse } from 'next/server';
 import { getSession } from "next-auth/react";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest, res: NextResponse) {
   const session = await getSession(req);
 
   if (session) {
     // Envoyer les informations de session nécessaires au client
-    return res.status(200).json({ user: session.user})
+    return NextResponse.json({ user: session.user}, { status: 200 })
   } else {
     // Gérer le cas où aucune session n'est trouvée
-    return res.status(401).json({ error: "No active session" })
+    return NextResponse.json({ error: "No active session" }, { status: 401 })
   }
 }
