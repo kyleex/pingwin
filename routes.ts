@@ -4,7 +4,7 @@
  * @type {string[]}
  */
 
-export const publicRoutes = ["/", "/new-verification"];
+export const publicRoutes = ["/", "/new-verification", "/api/matches"];
 
 /**
  * An array of routes use for authentication.
@@ -20,11 +20,11 @@ export const authRoutes = ["/login", "/register", "/error", "/reset-password"];
  * @type {string}
  */
 
-export const apiAuthPrefix = "/api/auth";
+export const apiAuthPrefix = ["/api/auth", "/api/matches",];
 
 /**
  * The default redirect path after logging in .
  * @type {string}
  */
 
-export const DEFAULT_LOGIN_REDIRECT = "/";
+export const DEFAULT_LOGIN_REDIRECT = "/app";

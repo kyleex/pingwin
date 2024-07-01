@@ -26,3 +26,16 @@ export const registerSchema = z.object({
     message: "Name is required",
   }),
 });
+
+export const addMatchSchema = z.object({
+  opponentPlayerName: z.string().min(1, {
+    message: "Opponents player name is required",
+  }),
+  playerSets: z.number().min(1).max(4, {
+    message: "Player sets is required",
+  }),
+  opponentSets: z.number().min(1).max(4, {
+    message: "Opponent sets is required",
+  }),
+});
+

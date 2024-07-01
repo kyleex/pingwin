@@ -3,11 +3,13 @@ import { LoginButton } from "@/components/auth/login-button";
 
 export default async function Home() {
   return (
-    <main className="flex h-full flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-sky-400 to-blue-800">
+    <main className="w-full h-full flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-sky-400 to-blue-800">
+      <img src="/logo-pingwins.svg" alt="pingwins logo" className="w-40 h-40" />
       <div className="space-y-6 text-center">
         <h1 className="text-6xl font-semibold text-white drop-shadow-md">
-          🔐 Auth
+          Welcome to Pingwin
         </h1>
+        <p>Your smashion table tennis companion app</p>
         <p className="text-white text-lg">A simple authentification service</p>
         <div>
           <LoginButton>
@@ -20,3 +22,4 @@ export default async function Home() {
     </main>
   );
 }
+
