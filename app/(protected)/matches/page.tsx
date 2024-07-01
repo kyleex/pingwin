@@ -21,13 +21,20 @@ import Link from "next/link";
 import FooterNavigation from "@/components/layout/footer-nav";
 import Header from "@/components/layout/header";
 
+type Match = {
+  id: string;
+  player2: string;
+  score: string;
+  winner: string;
+};
+
 const MatchesPage = () => {
   const session = useSession();
-  const [matches, setMatches] = useState([]);
+  const [matches, setMatches] = useState<Match[]>([]);
 
-  const [opponentPlayerName, setopponentPlayerName] = useState("");
-  const [playerSets, setplayerSets] = useState("");
-  const [opponentSets, setopponentSets] = useState("");
+  const [opponentPlayerName, setOpponentPlayerName] = useState("");
+  const [playerSets, setPlayerSets] = useState("");
+  const [opponentSets, setOpponentSets] = useState("");
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -50,7 +57,7 @@ const MatchesPage = () => {
         if (data?.success) {
           fetch("/api/matches")
             .then((response) => response.json())
-            .then((data) => setMatches(data))
+            .then((data: Match[]) => setMatches(data))
             .catch((error) => console.error("Error fetching matches:", error));
         }
       });
@@ -60,11 +67,11 @@ const MatchesPage = () => {
   useEffect(() => {
     fetch("/api/matches", {
       method: "GET",
-      headers: [
-        ["Content-Type", "application/json"],
-        ["Accept", "application/json"],
-        ["userId", session.data?.user.id],
-      ],
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        userId: session.data?.user.id,
+      },
     })
       .then((response) => {
         if (!response.ok) {
@@ -72,9 +79,9 @@ const MatchesPage = () => {
         }
         return response.json();
       })
-      .then((data) => setMatches(data))
+      .then((data: Match[]) => setMatches(data))
       .catch((error) => console.error("Error fetching matches:", error));
-  }, []);
+  }, [session.data]);
 
   const SHEET_SIDES = ["top", "right", "bottom", "left"] as const;
   type SheetSide = (typeof SHEET_SIDES)[2];
@@ -82,11 +89,10 @@ const MatchesPage = () => {
   return (
     <>
       <header className="w-full px-4">
-        <Header></Header>
+        <Header />
       </header>
 
       <main className="flex flex-col grow overflow-auto gap-y-3 w-fit mt-4">
-        {/* Ajouter une partie */}
         <section className="flex w-fit mx-5">
           <Card>
             <CardContent className="flex flex-row gap-x-3 pt-6 w-fit">
@@ -117,9 +123,6 @@ const MatchesPage = () => {
                     <SheetContent side="top" className="absolute">
                       <SheetHeader>
                         <SheetTitle>Ajouter une partie</SheetTitle>
-                        {/* <SheetDescription>
-                            Make changes to your profile here. Click save when you're done.
-                          </SheetDescription> */}
                       </SheetHeader>
                       <div className="grid gap-4 py-4">
                         <div className="grid grid-cols-4 items-center gap-4">
@@ -128,7 +131,7 @@ const MatchesPage = () => {
                             type="text"
                             value={opponentPlayerName}
                             onChange={(e) =>
-                              setopponentPlayerName(e.target.value)
+                              setOpponentPlayerName(e.target.value)
                             }
                             className="col-span-3"
                             placeholder="Prénom NOM"
@@ -141,7 +144,7 @@ const MatchesPage = () => {
                           <Input
                             type="number"
                             value={playerSets}
-                            onChange={(e) => setplayerSets(e.target.value)}
+                            onChange={(e) => setPlayerSets(e.target.value)}
                             placeholder="0"
                             className="col-span-3"
                           />
@@ -151,7 +154,7 @@ const MatchesPage = () => {
                           <Input
                             type="number"
                             value={opponentSets}
-                            onChange={(e) => setopponentSets(e.target.value)}
+                            onChange={(e) => setOpponentSets(e.target.value)}
                             placeholder="0"
                             className="col-span-3"
                           />
@@ -172,20 +175,18 @@ const MatchesPage = () => {
           </Card>
         </section>
 
-        {/* Afficher la liste des matches jouées */}
         <section className="mb-4 w-full px-5 overflow-srcoll">
           <div>
             {matches.length > 0 && (
               <div>
-                {(matches as any[]).map((match) => (
+                {matches.map((match: Match) => (
                   <div key={match.id}>
                     <Link href={`/matches/${match.id}`}>
                       <li key={match.id} className="list-none my-4">
                         <Card className="flex items-center my-2 cursor-pointer">
                           <CardContent className="p-4 flex flex-row items-center w-full">
                             <span
-                              className={`flex justify-center items-center size-10 rounded text-white grow-0 ${
-                                match.winner == session.data?.user.name
+                              className={`flex justify-center items-center size-10 rounded text-white grow-0 ${match.winner == session.data?.user.name
                                   ? "bg-dark-sea-green"
                                   : "bg-fire-opal"
                               } text-2xl font-bold mr-5`}
@@ -233,7 +234,7 @@ const MatchesPage = () => {
         </section>
       </main>
       <footer className="fixed w-full bottom-0">
-        <FooterNavigation></FooterNavigation>
+        <FooterNavigation />
       </footer>
     </>
   );

@@ -25,18 +25,15 @@ export interface iconProps
   asChild?: boolean;
 }
 
-const Icon = React.forwardRef<HTMLButtonElement, iconProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
-    return (
-      <Comp
-        className={cn(iconVariants({ variant, size, className }))}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
+const Icon = ({ className, variant, size, asChild = false, ...props }: iconProps) => {
+  const Comp = (asChild ? Slot : "button") as React.ElementType;
+  return (
+    <Comp
+      className={cn(iconVariants({ variant, size, className }))}
+      {...props}
+    />
+  );
+};
 Icon.displayName = "Icon";
 
 export { Icon, iconVariants };

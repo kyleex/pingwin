@@ -8,7 +8,7 @@ export const generateResetPasswordToken = async (email: string) => {
   const token = uuidv4();
   const expires = new Date(new Date().getTime() + 3600 * 1000); // 1 hour from now
 
-  const existingToken = getResetPasswordTokenByEmail(email);
+  const existingToken = await getResetPasswordTokenByEmail(email);
 
   if (existingToken) {
     await db.resetPasswordToken.delete({

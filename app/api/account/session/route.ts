@@ -1,9 +1,10 @@
 // pages/api/account/session.ts
 import { NextRequest, NextResponse } from 'next/server';
-import { getSession } from "next-auth/react";
+import { auth } from "@/lib/auth";
+
 
 export async function GET(req: NextRequest, res: NextResponse) {
-  const session = await getSession(req);
+  const session = await auth()
 
   if (session) {
     // Envoyer les informations de session nécessaires au client

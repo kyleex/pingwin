@@ -28,6 +28,13 @@ import Link from "next/link";
 import Header from "@/components/layout/header";
 import FooterNavigation from "@/components/layout/footer-nav";
 
+type Match = {
+  id: string;
+  player2: string;
+  score: string;
+  winner: string;
+};
+
 const AppPage = () => {
   const router = useRouter();
   const session = useSession();
@@ -36,7 +43,7 @@ const AppPage = () => {
 
   type SheetSide = (typeof SHEET_SIDES)[2];
 
-  const [matches, setMatches] = useState([]);
+  const [matches, setMatches] = useState<Match[]>([]);
 
   useEffect(() => {
     fetch("/api/matches", {
@@ -48,7 +55,7 @@ const AppPage = () => {
         }
         return response.json();
       })
-      .then((data) => setMatches(data))
+      .then((data: Match[]) => setMatches(data))
       .catch((error) => console.error("Error fetching matches:", error));
   }, []);
 
@@ -83,6 +90,8 @@ const AppPage = () => {
       });
     });
   };
+
+
 
   return (
     <>

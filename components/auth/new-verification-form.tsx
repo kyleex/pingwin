@@ -1,15 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, Suspense } from "react";
 import { BeatLoader } from "react-spinners";
 import { useSearchParams } from "next/navigation";
+import { ErrorBoundary } from "react-error-boundary";
 
 import { newVerification } from "@/actions/new-verification";
 import { CardWrapper } from "./card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 
-export const NewVerificationForm = () => {
+const NewVerificationFormContent = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
@@ -21,7 +22,7 @@ export const NewVerificationForm = () => {
     if (success || error) return;
 
     if (!token) {
-      SetError: "Missing token!";
+      setError("Missing token!");
       return;
     }
 
@@ -54,3 +55,18 @@ export const NewVerificationForm = () => {
     </CardWrapper>
   );
 };
+
+const ErrorFallback = ({ error }: { error: Error }) => (
+  <div role="alert">
+    <p>Something went wrong:</p>
+    <pre>{error.message}</pre>
+  </div>
+);
+
+export const NewVerificationForm = () => (
+  <ErrorBoundary FallbackComponent={ErrorFallback}>
+    <Suspense fallback={<div>Loading...</div>}>
+      <NewVerificationFormContent />
+    </Suspense>
+  </ErrorBoundary>
+);
