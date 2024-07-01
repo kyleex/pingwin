@@ -14,18 +14,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-<<<<<<< HEAD
-    <html lang="en">
-      <body className={`${roboto} w-screen`}>{children}</body>
-=======
-    <html
-      lang="fr"
-      className={`w-full h-full flex justify-center font-sans ${roboto}`}
-    >
+    <html lang="fr" className={`w-full h-full flex justify-center font-sans ${roboto}`}>
       <body className="w-full h-full flex flex-col justify-center md:max-w-md lg:max-w-md xl:max-w-md overscroll-none">
         {children}
       </body>
->>>>>>> dev
     </html>
   );
 }

@@ -50,7 +50,7 @@ const MatchesPage = () => {
         if (data?.success) {
           fetch("/api/matches")
             .then((response) => response.json())
-            .then((data) => matches(data))
+            .then((data) => setMatches(data))
             .catch((error) => console.error("Error fetching matches:", error));
         }
       });
@@ -177,7 +177,7 @@ const MatchesPage = () => {
           <div>
             {matches.length > 0 && (
               <div>
-                {matches.map((match) => (
+                {(matches as any[]).map((match) => (
                   <div key={match.id}>
                     <Link href={`/matches/${match.id}`}>
                       <li key={match.id} className="list-none my-4">

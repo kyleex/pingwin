@@ -19,10 +19,7 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-select": "^2.0.0",
-<<<<<<< HEAD
-=======
     "@radix-ui/react-separator": "^1.0.3",
->>>>>>> dev
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.1.0",
     "bcrypt": "^5.1.1",
