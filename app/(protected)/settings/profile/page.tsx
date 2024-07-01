@@ -24,11 +24,7 @@ const SettingsPage = () => {
 
   return (
     <>
-      <header className="px-6 w-full">
-        <Header />
-      </header>
-
-      <main className="w-full md:max-w-md lg:max-w-md xl:max-w-md px-6">
+      <main className="flex flex-col grow overflow-auto w-full md:max-w-md lg:max-w-md xl:max-w-md px-6">
         <span className="flex flex-row items-center my-5">
           <Link href="/settings" className="relative grow">
             <svg

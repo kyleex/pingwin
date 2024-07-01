@@ -12,7 +12,7 @@ const header = () => {
         <img
           src="/logo-pingwins.svg"
           alt="logo-pingwins"
-          className="max-w-10 max-h-10"
+          className="max-w-10 max-h-10 bg-gray-100 rounded-full"
         />
       </div>
       <Separator orientation="horizontal" />

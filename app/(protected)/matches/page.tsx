@@ -81,11 +81,11 @@ const MatchesPage = () => {
 
   return (
     <>
-      <header>
+      <header className="w-full px-4">
         <Header></Header>
       </header>
 
-      <main className="flex flex-col gap-y-3 w-fit overflow-scroll mt-4">
+      <main className="flex flex-col grow overflow-auto gap-y-3 w-fit mt-4">
         {/* Ajouter une partie */}
         <section className="flex w-fit mx-5">
           <Card>
@@ -232,7 +232,7 @@ const MatchesPage = () => {
           </div>
         </section>
       </main>
-      <footer>
+      <footer className="fixed w-full bottom-0">
         <FooterNavigation></FooterNavigation>
       </footer>
     </>

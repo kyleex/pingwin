@@ -16,9 +16,9 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`size-full flex justify-center font-sans ${roboto}`}
+      className={`w-full h-full flex justify-center font-sans ${roboto}`}
     >
-      <body className="w-full h-full sm:max-w-sm md:max-w-md lg:max-w-md xl:max-w-md flex flex-col">
+      <body className="w-full h-full flex flex-col justify-center md:max-w-md lg:max-w-md xl:max-w-md overscroll-none">
         {children}
       </body>
     </html>

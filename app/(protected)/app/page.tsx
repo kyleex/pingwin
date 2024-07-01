@@ -86,11 +86,11 @@ const AppPage = () => {
 
   return (
     <>
-      <header className="px-6 w-full">
+      <header className="px-4 w-full">
         <Header />
       </header>
 
-      <main className="mt-4 px-6">
+      <main className="flex flex-col grow overflow-auto mt-4 px-6">
         <section className="w-full md:max-w-md lg:max-w-md xl:max-w-md">
           <Card>
             <CardContent className="flex flex-row gap-x-3 pt-6">
@@ -185,12 +185,12 @@ const AppPage = () => {
                 <span
                   key={index}
                   className={`px-2 py-1 rounded text-white ${
-                    match.winner == session.data?.user.name
+                    match?.winner == session.data?.user.name
                       ? "bg-dark-sea-green"
                       : "bg-fire-opal"
                   }`}
                 >
-                  {match.winner == session.data?.user.name ? "V" : "D"}
+                  {match?.winner == session.data?.user.name ? "V" : "D"}
                 </span>
               ))}
               <button className="px-2 py-1 bg-yellow-500 text-white rounded">

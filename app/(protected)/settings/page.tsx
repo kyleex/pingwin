@@ -22,11 +22,11 @@ const SettingsPage = () => {
 
   return (
     <>
-      <header className="px-6 w-full">
+      <header className="px-4 w-full">
         <Header />
       </header>
 
-      <main className="flex flex-col gap-y-4 mt-3 mx-5">
+      <main className="flex flex-col grow overflow-auto gap-y-4 mt-3 mx-5">
         <Card>
           <CardContent className="flex flex-row items-center p-3">
             <Avatar className="mr-2">
